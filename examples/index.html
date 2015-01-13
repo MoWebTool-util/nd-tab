@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8"/>
+  <title>Demo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+<!--header-->
+<header>
+  <nav>
+    <ul class="tabs clearfix">
+      <li class="tab unread-tab">未确认</li>
+      <li class="tab read-tab">已确认</li>
+      <li class="tab normal-tab">正常</li>
+    </ul>
+  </nav>
+</header>
+
+<div class="panels">
+  <div class="panel unread-panel">
+    未确认标签页的内容
+  </div>
+  <div class="panel read-panel">
+    已确认标签页的内容
+  </div>
+  <div class="panel normal-panel">
+    正常标签页的内容
+  </div>
+</div>
+
+<script src="seajs/sea.js"></script>
+<script src="config.js"></script>
+<script>
+  seajs.use('index', function (Tab) {
+    'use strict';
+   /* new Tab({
+      itemTab:'.tab',
+      tabs:'.tabs',
+      itemPanel:'.panel',
+      panels:'.panels',
+      initIndex:0
+    });*/
+
+//    或者
+
+    new Tab({
+      itemTab:'.tab',
+      itemPanel:'.panel'
+    });
+
+  });
+</script>
+</body>
+
+</html>

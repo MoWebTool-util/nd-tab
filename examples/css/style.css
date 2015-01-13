@@ -1,0 +1,56 @@
+/*reset*/
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, form, ul, ol, pre, blockquote, textarea, input, figure {
+  margin: 0;
+}
+
+ul, ol, th, td, button, textarea, input {
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+/*common*/
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*tab*/
+
+.tabs {
+  background-color: #5F6065;
+  color: #ADAEB2
+}
+
+.tab {
+  text-align: center;
+  width: 33.3%;
+  float: left;
+  height: 45px;
+  line-height: 45px;
+  cursor: pointer
+}
+
+.tab span {
+  color: #BF4D55
+}
+
+.tab.active {
+  color: #D8B766;
+  border-bottom: 3px solid #d8b766;
+}
+
+
