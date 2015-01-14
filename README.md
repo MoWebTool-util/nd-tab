@@ -14,5 +14,21 @@ $ spm install nd-tab --save
 
 ```js
 var Tab = require('nd-tab');
+
+new Tab({
+      itemTab:'.tab',
+      tabs:'.tabs',
+      itemPanel:'.panel',
+      panels:'.panels',
+      initIndex:0
+    });
+
+    或者
+    
+ new Tab({
+      itemTab:'.tab',
+      itemPanel:'.panel'
+    });    
+    
 // use Tab
 ```
