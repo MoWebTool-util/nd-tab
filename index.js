@@ -41,10 +41,7 @@ Tab.prototype.bindEvent = function () {
   $(document).on('click', this.element, function (e) {
     var currentLi = $(e.target).closest(self.element);
     var index =parseElement(self.element,self.tabs).index(currentLi);
-    if (index !== self.currentIndex) {
-      self._onChangeIndex(index, self.currentIndex);
-    }
-    self.currentIndex = index;
+    self.set(index);
   });
 };
 Tab.prototype._onChangeIndex = function (now) {
@@ -56,6 +53,13 @@ Tab.prototype._onChangeIndex = function (now) {
       nowPanel.show();
       nowPanel.siblings().hide();
     }
+};
+Tab.prototype.set=function(index){
+  var self=this;
+  if (index !== self.currentIndex) {
+    self._onChangeIndex(index, self.currentIndex);
+  }
+  self.currentIndex = index;
 };
 
 
