@@ -6,16 +6,16 @@
 
 'use strict';
 
-var Tab;
 var $ = require('jquery');
 
-function parseElement(element,parents){
-  return parents.length?$(element, parents):$(element);
+function parseElement(element, parents) {
+  return parents.length ? $(element, parents) : $(element);
 }
 
-Tab = function (options) {
+var Tab = function(options) {
   return this.init(options);
 };
+
 /**
  *
  * @param options
@@ -26,41 +26,40 @@ Tab = function (options) {
  * options.initIndex 表示初始化选中某个标签的索引 例如0
  * @returns {Tab}
  */
-Tab.prototype.init = function (options) {
-  this.element = options.itemTab;
+Tab.prototype.init = function(options) {
+  this.itemTab = options.itemTab;
   this.tabs = $(options.tabs);
   this.panel = options.itemPanel;
   this.panels = $(options.panels);
-  this.initIndex = +options.initIndex||0;//初始化索引
+  this.initIndex = +options.initIndex || 0; //初始化索引
   this.bindEvent();
   this._onChangeIndex(this.initIndex);
   return this;
 };
-Tab.prototype.bindEvent = function () {
+
+Tab.prototype.bindEvent = function() {
   var self = this;
-  $(document).on('click', this.element, function (e) {
-    var currentLi = $(e.target).closest(self.element);
-    var index =parseElement(self.element,self.tabs).index(currentLi);
-    self.set(index);
+  this.tabs.on('click', this.itemTab, function(e) {
+    var currentLi = $(e.target).closest(self.itemTab);
+    var index = parseElement(self.itemTab, self.tabs).index(currentLi);
+    if (index !== self.currentIndex) {
+      self._onChangeIndex(index, self.currentIndex);
+    }
+    self.currentIndex = index;
   });
 };
-Tab.prototype._onChangeIndex = function (now) {
-    var nowTab = parseElement(this.element,this.tabs).eq(now);
-    var nowPanel = parseElement(this.panel,this.panels).eq(now);
-    if(nowTab&&nowPanel){
-      nowTab.siblings().removeClass('active');
-      nowTab.addClass('active');
-      nowPanel.show();
-      nowPanel.siblings().hide();
-    }
-};
-Tab.prototype.set=function(index){
-  var self=this;
-  if (index !== self.currentIndex) {
-    self._onChangeIndex(index, self.currentIndex);
-  }
-  self.currentIndex = index;
-};
 
+Tab.prototype._onChangeIndex = function(now) {
+  var nowTab = parseElement(this.itemTab, this.tabs).eq(now);
+  var nowPanel = parseElement(this.panel, this.panels).eq(now);
+
+  if (nowTab && nowPanel) {
+    nowTab.siblings().removeClass('active');
+    nowTab.addClass('active');
+
+    nowPanel.show();
+    nowPanel.siblings().hide();
+  }
+};
 
 module.exports = Tab;
