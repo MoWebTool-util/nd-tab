@@ -6,16 +6,16 @@
 
 'use strict';
 
+var Tab;
 var $ = require('jquery');
 
 function parseElement(element, parents) {
   return parents.length ? $(element, parents) : $(element);
 }
 
-var Tab = function(options) {
+Tab = function(options) {
   return this.init(options);
 };
-
 /**
  *
  * @param options
@@ -31,12 +31,11 @@ Tab.prototype.init = function(options) {
   this.tabs = $(options.tabs);
   this.panel = options.itemPanel;
   this.panels = $(options.panels);
-  this.initIndex = +options.initIndex || 0; //初始化索引
+  this.currentIndex = +options.initIndex || 0; //初始化索引
   this.bindEvent();
-  this._onChangeIndex(this.initIndex);
+  this._onChangeIndex(this.currentIndex);
   return this;
 };
-
 Tab.prototype.bindEvent = function() {
   var self = this;
   this.tabs.on('click', this.itemTab, function(e) {
@@ -48,7 +47,6 @@ Tab.prototype.bindEvent = function() {
     self.currentIndex = index;
   });
 };
-
 Tab.prototype._onChangeIndex = function(now) {
   var nowTab = parseElement(this.itemTab, this.tabs).eq(now);
   var nowPanel = parseElement(this.panel, this.panels).eq(now);
@@ -61,5 +59,6 @@ Tab.prototype._onChangeIndex = function(now) {
     nowPanel.siblings().hide();
   }
 };
+
 
 module.exports = Tab;
