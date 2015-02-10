@@ -38,13 +38,11 @@ Tab.prototype.init = function(options) {
 };
 Tab.prototype.bindEvent = function() {
   var self = this;
-  this.tabs.on('click', this.itemTab, function(e) {
+  var tabs=this.tabs&&this.tabs.length>0?this.tabs:$(document);
+   tabs.on('click', this.itemTab, function(e) {
     var currentLi = $(e.target).closest(self.itemTab);
-    var index = parseElement(self.itemTab, self.tabs).index(currentLi);
-    if (index !== self.currentIndex) {
-      self._onChangeIndex(index, self.currentIndex);
-    }
-    self.currentIndex = index;
+    var index =parseElement(self.itemTab,self.tabs).index(currentLi);
+    self.set(index);
   });
 };
 Tab.prototype._onChangeIndex = function(now) {
@@ -59,6 +57,12 @@ Tab.prototype._onChangeIndex = function(now) {
     nowPanel.siblings().hide();
   }
 };
-
+Tab.prototype.set=function(index){
+  var self=this;
+  if (index !== self.currentIndex) {
+    self._onChangeIndex(index, self.currentIndex);
+  }
+  self.currentIndex = index;
+};
 
 module.exports = Tab;
